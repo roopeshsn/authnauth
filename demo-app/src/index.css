@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.form-group span {
+  display: none;
+}
+
+.form-group input:invalid[focus="true"] ~ span {
+  display: block;
+}
