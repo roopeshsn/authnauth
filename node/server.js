@@ -4,10 +4,11 @@ const fs = require("fs")
 const fsPromises = require("fs").promises
 const express = require("express")
 const cors = require("cors")
+require("dotenv").config()
 const errorHandler = require("./middleware/errorHandler")
 const corsOptions = require("./config/corsOptions")
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 5000
 
 // In-built middleware
 app.use(express.urlencoded({ extended: false }))
