@@ -18,6 +18,10 @@ app.use(express.static(path.join(__dirname, "/public")))
 app.use(cors(corsOptions))
 app.use(errorHandler)
 
+// routes
+app.use("/register", require("./routes/api/register"))
+app.use("/auth", require("./routes/api/auth"))
+
 app.get("/", (req, res) => {
   res.send("Hello Roopesh. S!")
 })

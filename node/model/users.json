@@ -1,0 +1,10 @@
+[
+  {
+    "email": "test1@test.com",
+    "password": "$2b$10$qaFiVA12wHu8S5WMjLD0a.9qoE2zKSGxVpaKGMjHnrhLf6qg51rE6"
+  },
+  {
+    "email": "test2@test.com",
+    "password": "$2b$10$b0yOkYGVYMShV2iuEP1beex5mZtANX.Ho013Y9i2MCiVQCLbth/de"
+  }
+]
