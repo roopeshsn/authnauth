@@ -1,16 +1,13 @@
 import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-// import { useAuth } from "../../contexts/AuthContext"
+import { useAuth } from "../../contexts/AuthContext"
 import CenteredContainer from "../CenteredContainer"
 import FormInput from "./FormInput"
 
 export default function Signup() {
   // const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  // const emailRef = useRef()
-  // const passwordRef = useRef()
-  // const passwordConfirmationRef = useRef()
-  // const { signup, currentUser } = useAuth()
+  const { register, currentUser } = useAuth()
 
   const [values, setValues] = useState({
     email: "",
@@ -72,8 +69,11 @@ export default function Signup() {
   //   }
   // }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
+    console.log({ email: values.email, password: values.password })
+    const data = await register(values.email, values.password)
+    console.log(data)
   }
 
   const onChange = (e) => {
