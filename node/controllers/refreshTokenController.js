@@ -1,12 +1,5 @@
-const users = require("../model/users.json")
+const User = require("../model/User")
 const jwt = require("jsonwebtoken")
-
-const usersDB = {
-    users,
-    setUsers: function (data) {
-        this.users = data
-    },
-}
 
 const handleRefreshToken = async (req, res) => {
     const cookies = req.cookies
@@ -15,9 +8,7 @@ const handleRefreshToken = async (req, res) => {
     }
     console.log(cookies.jwt)
     const refreshToken = cookies.jwt
-    const foundUser = usersDB.users.find(
-        (user) => user.refreshToken === refreshToken
-    )
+    const foundUser = await User.findOne({ refreshToken }).exec()
     if (!foundUser) {
         return res.sendStatus(403)
     }
