@@ -1,10 +1,1 @@
-[
-  {
-    "email": "test1@test.com",
-    "password": "$2b$10$qaFiVA12wHu8S5WMjLD0a.9qoE2zKSGxVpaKGMjHnrhLf6qg51rE6"
-  },
-  {
-    "email": "test2@test.com",
-    "password": "$2b$10$b0yOkYGVYMShV2iuEP1beex5mZtANX.Ho013Y9i2MCiVQCLbth/de"
-  }
-]
+[{"email":"test1@test.com","roles":{"User":2001},"password":"$2b$10$6KL0VRm90IkNUv7jrSBteuuZg3c9V3C/tjt.2.oTK44jSRGNxuESC","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QxQHRlc3QuY29tIiwiaWF0IjoxNjY0Njc5ODgzLCJleHAiOjE2NjQ3NjYyODN9.xfqBVzW2JcnJ71-X6FlyzfMoPbgzwzdJ-ty_ZXOTKSk"}]
