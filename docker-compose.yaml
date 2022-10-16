@@ -1,0 +1,13 @@
+version: '2.10'
+services:
+  server:
+    build: ./node
+    container_name: server_c
+    ports:
+      - '5000:5000'
+  client:
+    build: ./demo-app
+    container_name: client_c
+    ports:
+      - '3000:3000'
+    stdin_open: true
