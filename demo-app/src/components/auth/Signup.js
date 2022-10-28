@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
 import CenteredContainer from "../CenteredContainer"
 import FormInput from "./FormInput"
+import axios from '../../api/axios';
+
+const REGISTER_URL = '/register';
 
 export default function Signup() {
-  // const [error, setError] = useState("")
+  const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
-  const { register, currentUser } = useAuth()
 
   const [values, setValues] = useState({
     email: "",
@@ -72,8 +74,26 @@ export default function Signup() {
   async function handleSubmit(e) {
     e.preventDefault()
     console.log({ email: values.email, password: values.password })
-    const data = await register(values.email, values.password)
-    console.log(data)
+
+    try {
+      const response = await axios.post(REGISTER_URL,
+          JSON.stringify({email: values.email, password: values.password }),
+          {
+              headers: { 'Content-Type': 'application/json' },
+              withCredentials: true
+          }
+      );
+      console.log(JSON.stringify(response?.data));
+      setValues({})
+    } catch (err) {
+      if (!err?.response) {
+          setError('No Server Response');
+      } else if (err.response?.status === 409) {
+          setError('Username Taken');
+      } else {
+          setError('Registration Failed')
+      }
+  }
   }
 
   const onChange = (e) => {

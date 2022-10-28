@@ -3,9 +3,13 @@ import { Link, useNavigate } from "react-router-dom"
 // import { useAuth } from "../../contexts/AuthContext"
 import CenteredContainer from "../CenteredContainer"
 import FormInput from "./FormInput"
+import useAuth from '../../hooks/useAuth';
+import axios from '../../api/axios';
+const LOGIN_URL = '/auth';
 
 export default function Signin() {
-  // const [error, setError] = useState("")
+  const { setAuth } = useAuth();
+  const [errMsg, setErrMsg] = useState("")
   const [loading, setLoading] = useState(false)
   const [values, setValues] = useState({
     email: "",
@@ -46,8 +50,32 @@ export default function Signin() {
   //   }
   // }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
+    try {
+      const response = await axios.post(LOGIN_URL,
+          JSON.stringify({ email: values.email, password: values.password }),
+          {
+              headers: { 'Content-Type': 'application/json' },
+              withCredentials: true
+          }
+      );
+      console.log(JSON.stringify(response?.data));
+      const accessToken = response?.data?.accessToken;
+      //const roles = response?.data?.roles;
+      setAuth({ email: values.email, password: values.password, accessToken });
+      // navigate(from, { replace: true });
+  } catch (err) {
+      if (!err?.response) {
+          setErrMsg('No Server Response');
+      } else if (err.response?.status === 400) {
+          setErrMsg('Missing Username or Password');
+      } else if (err.response?.status === 401) {
+          setErrMsg('Unauthorized');
+      } else {
+          setErrMsg('Login Failed');
+      }
+  }
   }
 
   const onChange = (e) => {
