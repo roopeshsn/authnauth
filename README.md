@@ -10,3 +10,16 @@ JWT -> JSON Web Tokens
 - Handle authentication
 - Allow access to API end points
 - End points provide data resources
+
+## Getting Started
+
+### To start ./demo-app
+```
+cd demo-app
+npm run start
+```
+### To start ./node in dev mode
+```
+cd node
+npm run dev
+```
