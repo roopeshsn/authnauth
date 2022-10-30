@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../contexts/AuthContext"
 import CenteredContainer from "../CenteredContainer"
 import FormInput from "./FormInput"
-import axios from '../../api/axios';
+import axios from "../../api/axios"
 
-const REGISTER_URL = '/register';
+const REGISTER_URL = "/register"
 
 export default function Signup() {
   const [error, setError] = useState("")
@@ -76,24 +76,25 @@ export default function Signup() {
     console.log({ email: values.email, password: values.password })
 
     try {
-      const response = await axios.post(REGISTER_URL,
-          JSON.stringify({email: values.email, password: values.password }),
-          {
-              headers: { 'Content-Type': 'application/json' },
-              withCredentials: true
-          }
-      );
-      console.log(JSON.stringify(response?.data));
+      const response = await axios.post(
+        REGISTER_URL,
+        JSON.stringify({ email: values.email, password: values.password }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        },
+      )
+      console.log(JSON.stringify(response?.data))
       setValues({})
     } catch (err) {
       if (!err?.response) {
-          setError('No Server Response');
+        setError("No Server Response")
       } else if (err.response?.status === 409) {
-          setError('Username Taken');
+        setError("Username Taken")
       } else {
-          setError('Registration Failed')
+        setError("Registration Failed")
       }
-  }
+    }
   }
 
   const onChange = (e) => {
@@ -102,15 +103,15 @@ export default function Signup() {
 
   return (
     <CenteredContainer>
-      <div className='w-full max-w-sm'>
+      <div className="w-full max-w-sm">
         {/* {error && console.log(error)}
         {console.log(currentUser)} */}
         <form
           onSubmit={handleSubmit}
-          className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
-          <div className='mb-6 py-2'>
-            <h2 className='text-2xl text-gray-800 font-bold'>Sign Up</h2>
+          <div className="mb-6 py-2">
+            <h2 className="text-2xl text-gray-800 font-bold">Sign Up</h2>
           </div>
 
           {inputs.map((input) => (
@@ -122,21 +123,21 @@ export default function Signup() {
             />
           ))}
 
-          <div className='mb-3'>
+          <div className="mb-3">
             <button
-              className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               disabled={loading}
-              type='submit'
+              type="submit"
             >
               Register
             </button>
           </div>
-          <div className='py-2'>
-            <p className='text-gray-500'>
+          <div className="py-2">
+            <p className="text-gray-500">
               Already have an account?
               <Link
-                to='/signin'
-                className='text-sm text-green-500 font-bold underline'
+                to="/signin"
+                className="text-sm text-green-500 font-bold underline"
               >
                 {" "}
                 Signin

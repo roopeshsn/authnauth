@@ -11,10 +11,10 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route path='/' element={<Home />}></Route>
-            <Route path='/signup' element={<Signup />}></Route>
-            <Route path='/signin' element={<Signin />}></Route>
-            <Route path='/forgot-password' element={<ForgotPassword />}></Route>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/signin" element={<Signin />}></Route>
+            <Route path="/forgot-password" element={<ForgotPassword />}></Route>
           </Routes>
         </AuthProvider>
       </Router>
