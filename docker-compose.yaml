@@ -1,20 +1,24 @@
-version: '2.10'
+version: "2.10"
 services:
   server:
     build: ./node
     container_name: server_c
+    environment:
+      - DATABASE_URI=mongodb://mongodb:27017/authnauth
     ports:
-      - '5000:5000'
+      - "5000:5000"
+    depends_on:
+      - mongodb
   client:
     build: ./demo-app
     container_name: client_c
     ports:
-      - '3000:3000'
+      - "3000:3000"
     stdin_open: true
-  mongo:
+  mongodb:
     container_name: mongo_c
     image: mongo
     volumes:
-    - ./data:/data/db
+      - ./db:/data/db
     ports:
-    - '27017:27017'
+      - "27017:27017"

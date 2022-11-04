@@ -13,13 +13,27 @@ JWT -> JSON Web Tokens
 
 ## Getting Started
 
-### To start ./demo-app
+### Typical
+
+#### To start ./demo-app
+
 ```
 cd demo-app
 npm run start
 ```
-### To start ./node in dev mode
+
+#### To start ./node in dev mode
+
 ```
 cd node
 npm run dev
+```
+
+### Docker
+
+#### Using Docker Compose
+
+```
+docker compose build
+docker compose up
 ```
