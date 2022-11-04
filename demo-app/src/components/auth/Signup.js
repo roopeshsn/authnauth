@@ -4,13 +4,14 @@ import { useAuth } from "../../contexts/AuthContext"
 import CenteredContainer from "../CenteredContainer"
 import FormInput from "./FormInput"
 import axios from "../../api/axios"
+import Pop from "../Pop"
 
 const REGISTER_URL = "/register"
 
 export default function Signup() {
-  const [error, setError] = useState("")
+  const [successMsg, setSuccessMsg] = useState("")
+  const [errorMsg, setErrorMsg] = useState("")
   const [loading, setLoading] = useState(false)
-
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -53,28 +54,8 @@ export default function Signup() {
     },
   ]
 
-  // async function handleSubmit(e) {
-  //   e.preventDefault()
-  //   if (passwordRef.current.value !== passwordConfirmationRef.current.value) {
-  //     return setError("Passwords do not match")
-  //   }
-
-  //   try {
-  //     setError("")
-  //     setLoading(true)
-  //     // await signup(emailRef.current.value, passwordRef.current.value)
-  //     setLoading(false)
-  //     navigate("/profile")
-  //   } catch (error) {
-  //     setError("Failed to create an account")
-  //     setLoading(false)
-  //   }
-  // }
-
   async function handleSubmit(e) {
     e.preventDefault()
-    console.log({ email: values.email, password: values.password })
-
     try {
       const response = await axios.post(
         REGISTER_URL,
@@ -84,15 +65,20 @@ export default function Signup() {
           withCredentials: true,
         },
       )
+      if (response?.data) {
+        setSuccessMsg("Account Created Successfully")
+      }
       console.log(JSON.stringify(response?.data))
-      setValues({})
+      setTimeout(() => {
+        navigate("/dashboard")
+      }, 3000)
     } catch (err) {
       if (!err?.response) {
-        setError("No Server Response")
+        setErrorMsg("No server response")
       } else if (err.response?.status === 409) {
-        setError("Username Taken")
+        setErrorMsg("Email already exist")
       } else {
-        setError("Registration Failed")
+        setErrorMsg("Registration failed")
       }
     }
   }
@@ -104,8 +90,10 @@ export default function Signup() {
   return (
     <CenteredContainer>
       <div className="w-full max-w-sm">
-        {/* {error && console.log(error)}
-        {console.log(currentUser)} */}
+        <div className="absolute bottom-4 lg:right-4">
+          {successMsg && <Pop message={successMsg} status={"success"} />}
+          {errorMsg && <Pop message={errorMsg} status={"error"} />}
+        </div>
         <form
           onSubmit={handleSubmit}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"

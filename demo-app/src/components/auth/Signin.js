@@ -5,10 +5,12 @@ import CenteredContainer from "../CenteredContainer"
 import FormInput from "./FormInput"
 import useAuth from "../../hooks/useAuth"
 import axios from "../../api/axios"
+import Pop from "../Pop"
 const LOGIN_URL = "/auth"
 
 export default function Signin() {
   const { setAuth } = useAuth()
+  const [successMsg, setSuccessMsg] = useState("")
   const [errMsg, setErrMsg] = useState("")
   const [loading, setLoading] = useState(false)
   const [values, setValues] = useState({
@@ -35,21 +37,6 @@ export default function Signin() {
   }
   const navigate = useNavigate()
 
-  // async function handleSubmit(e) {
-  //   e.preventDefault()
-
-  //   try {
-  //     setError("")
-  //     setLoading(true)
-  //     // await signin(emailRef.current.value, passwordRef.current.value)
-  //     setLoading(false)
-  //     navigate("/profile")
-  //   } catch (error) {
-  //     setError("Failed to signin")
-  //     setLoading(false)
-  //   }
-  // }
-
   async function handleSubmit(e) {
     e.preventDefault()
     try {
@@ -65,14 +52,17 @@ export default function Signin() {
       const accessToken = response?.data?.accessToken
       //const roles = response?.data?.roles;
       setAuth({ email: values.email, password: values.password, accessToken })
-      // navigate(from, { replace: true });
+      setSuccessMsg("Login success")
+      setTimeout(() => {
+        navigate("/dashboard")
+      }, 3000)
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response")
       } else if (err.response?.status === 400) {
         setErrMsg("Missing Username or Password")
       } else if (err.response?.status === 401) {
-        setErrMsg("Unauthorized")
+        setErrMsg("Wrong username or password")
       } else {
         setErrMsg("Login Failed")
       }
@@ -85,9 +75,11 @@ export default function Signin() {
 
   return (
     <CenteredContainer>
-      <div className="w-full max-w-sm">
-        {/* {error && console.log(error)}
-        {console.log(currentUser)} */}
+      <div className="absolute bottom-4 right-4">
+        {successMsg && <Pop message={successMsg} status={"success"} />}
+        {errMsg && <Pop message={errMsg} status={"error"} />}
+      </div>
+      <div className="w-full max-w-sm relative">
         <form
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit}
