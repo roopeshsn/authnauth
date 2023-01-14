@@ -17,6 +17,7 @@ spec:
       containers:
         - name: mongo
           image: mongo:5.0
+          args: ["--dbpath", "/data/db"]
           ports:
             - containerPort: 27017
           env:
@@ -30,6 +31,10 @@ spec:
                 secretKeyRef:
                   name: mongo-secret
                   key: mongo-password
+      volumes:
+        - name: mongo-volume
+          persistentVolumeClaim:
+            claimName: mongo-persistent-volume-claim
 
 ---
 apiVersion: v1
@@ -43,3 +48,5 @@ spec:
     - protocol: TCP
       port: 27017
       targetPort: 27017
+      nodePort: 32000
+  type: NodePort
