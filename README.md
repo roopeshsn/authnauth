@@ -1,5 +1,7 @@
 # Auth and Auth (authnauth)
 
+This app demonstrates the auth process which is built using the MERN stack. Additionaly the app is containerised using Docker.
+
 ## Authentication and Authorization
 
 Authentication is the process of verifying who someone is.
