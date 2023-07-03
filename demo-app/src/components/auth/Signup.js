@@ -1,14 +1,15 @@
 import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { useAuth } from "../../contexts/AuthContext"
 import CenteredContainer from "../CenteredContainer"
 import FormInput from "./FormInput"
 import axios from "../../api/axios"
 import Pop from "../Pop"
+import useAuth from "../../hooks/useAuth"
 
 const REGISTER_URL = "/register"
 
 export default function Signup() {
+  const { setAuth } = useAuth()
   const [successMsg, setSuccessMsg] = useState("")
   const [errorMsg, setErrorMsg] = useState("")
   const [loading, setLoading] = useState(false)
@@ -68,6 +69,8 @@ export default function Signup() {
       if (response?.data) {
         setSuccessMsg("Account Created Successfully")
       }
+      const accessToken = response?.data?.accessToken
+      setAuth({ email: values.email, password: values.password, accessToken })
       console.log(JSON.stringify(response?.data))
       setTimeout(() => {
         navigate("/dashboard")

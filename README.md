@@ -5,7 +5,7 @@
 Authentication is the process of verifying who someone is.
 Authorization is the process of verifying what resources a user has access to. This can by achieved through JWT. JWT uses authorization headers.
 
-JWT -> JSON Web Tokens
+JWT stands for JSON Web Tokens
 
 - Handle authentication
 - Allow access to API end points
@@ -13,16 +13,38 @@ JWT -> JSON Web Tokens
 
 ## Getting Started
 
-### Typical
+### Install dependencies
 
-#### To start ./demo-app
+```
+cd demo-app
+npm i
+```
+
+```
+cd node
+npm i
+```
+
+### Setting environment variables for backend (node.js)
+
+Create a file with a name `.env` and copy, paste the following,
+
+```
+DATABASE_URI=`YOUR_DB_URI`
+ACCESS_TOKEN_SECRET=`A_STRING_OF_YOUR_CHOICE`
+REFRESH_TOKEN_SECRET=`A_STRING_OF_YOUR_CHOICE`
+```
+
+For `DATABASE_URI`, create a new cluster from your Atlas dashboard.
+
+### To start ./demo-app
 
 ```
 cd demo-app
 npm run start
 ```
 
-#### To start ./node in dev mode
+### To start ./node in dev mode
 
 ```
 cd node

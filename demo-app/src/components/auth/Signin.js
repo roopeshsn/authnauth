@@ -2,9 +2,10 @@ import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import CenteredContainer from "../CenteredContainer"
 import FormInput from "./FormInput"
-import useAuth from "../../hooks/useAuth"
 import axios from "../../api/axios"
 import Pop from "../Pop"
+import useAuth from "../../hooks/useAuth"
+
 const LOGIN_URL = "/auth"
 
 export default function Signin() {
@@ -49,12 +50,11 @@ export default function Signin() {
       )
       console.log(JSON.stringify(response?.data))
       const accessToken = response?.data?.accessToken
-      //const roles = response?.data?.roles;
-      setAuth({ email: values.email, password: values.password, accessToken })
+      const roles = response?.data?.roles;
+      setAuth({ email: values.email, password: values.password, accessToken, roles })
       setSuccessMsg("Login success")
-      setTimeout(() => {
-        navigate("/dashboard")
-      }, 3000)
+      setLoading(false)
+      navigate("/dashboard")
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response")
