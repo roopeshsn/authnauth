@@ -5,6 +5,8 @@ services:
     container_name: server_c
     environment:
       - DATABASE_URI=mongodb://mongodb:27017/authnauth
+      - ACCESS_TOKEN_SECRET=authnauth
+      - REFRESH_TOKEN_SECRET=authnauth
     ports:
       - "5000:5000"
     depends_on:
