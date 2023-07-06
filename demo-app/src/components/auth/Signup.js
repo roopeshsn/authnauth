@@ -68,13 +68,8 @@ export default function Signup() {
       )
       if (response?.data) {
         setSuccessMsg("Account Created Successfully")
-      }
-      const accessToken = response?.data?.accessToken
-      setAuth({ email: values.email, password: values.password, accessToken })
-      console.log(JSON.stringify(response?.data))
-      setTimeout(() => {
         navigate("/dashboard")
-      }, 3000)
+      }
     } catch (err) {
       if (!err?.response) {
         setErrorMsg("No server response")

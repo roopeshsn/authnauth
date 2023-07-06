@@ -3,11 +3,9 @@ const jwt = require("jsonwebtoken")
 
 const handleRefreshToken = async (req, res) => {
     const cookies = req.cookies
-    console.log(req.cookies)
     if (!cookies?.jwt) {
         return res.sendStatus(401)
     }
-    console.log(cookies.jwt)
     const refreshToken = cookies.jwt
     const foundUser = await User.findOne({ refreshToken }).exec()
     if (!foundUser) {
@@ -33,7 +31,7 @@ const handleRefreshToken = async (req, res) => {
                 process.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: "86400s" }
             )
-            res.json({ accessToken })
+            res.json({ accessToken, roles })
         }
     )
 }

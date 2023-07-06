@@ -29,7 +29,7 @@ npm i
 
 ### Setting environment variables for backend (node.js)
 
-Create a file with a name `.env` and copy, paste the following,
+Create a file in the root of `./node` with a name `.env` and copy, paste the following,
 
 ```
 DATABASE_URI=`YOUR_DB_URI`

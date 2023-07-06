@@ -43,10 +43,10 @@ const handleLogin = async (req, res) => {
         res.cookie("jwt", refreshToken, {
             httpOnly: true,
             sameSite: "None",
-            // secure: true,
+            secure: true,
             maxAge: 24 * 60 * 60 * 1000,
         })
-        res.status(201).json({ accessToken })
+        res.status(201).json({ accessToken, roles })
     } else {
         res.status(401).json({ message: "wrong password" })
     }

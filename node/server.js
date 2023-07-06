@@ -40,7 +40,7 @@ app.use("/refresh", require("./routes/api/refresh"))
 app.use("/logout", require("./routes/api/logout"))
 
 app.get("/", (req, res) => {
-    res.send("Hello Roopesh. S!")
+    res.send("AuthnAuth API")
 })
 
 app.use(verifyJWT)
