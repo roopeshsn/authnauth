@@ -68,3 +68,5 @@ docker compose up
 2. [Full MERN Stack App: 0 to deployment on Kubernetes — part 1](https://medium.com/@kavinduchamiran/full-mern-stack-app-0-to-deployment-on-kubernetes-part-1-e2f2a3e2fd99)
 3. [MERN Stack with Kubernetes](https://blog.carbonteq.com/mern-stack-with-kubernetes/)
 4. [YAML Cheatsheet](https://lzone.de/cheat-sheet/YAML)
+5. [Node.js Resources - Dave Gray](https://github.com/gitdagray/node_js_resources)
+6. [Auth in React - Dave Gray](https://github.com/gitdagray/react_persist_login)
