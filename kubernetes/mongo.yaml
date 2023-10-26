@@ -22,15 +22,9 @@ spec:
             - containerPort: 27017
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secret
-                  key: mongo-user
+              value: "admin"
             - name: MONGO_INITDB_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mongo-secret
-                  key: mongo-password
+              value: "password"
       volumes:
         - name: mongo-volume
           persistentVolumeClaim:
@@ -48,5 +42,3 @@ spec:
     - protocol: TCP
       port: 27017
       targetPort: 27017
-      nodePort: 32000
-  type: NodePort

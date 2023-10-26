@@ -4,7 +4,7 @@ metadata:
   name: mongo-persistent-volume
 spec:
   capacity:
-    storage: 1Gi
+    storage: 3Gi
   accessModes:
     - ReadWriteMany
   local:

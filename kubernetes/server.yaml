@@ -14,9 +14,16 @@ spec:
     spec:
       containers:
         - name: server
-          image: roopeshsn/authnauth-server
+          image: roopeshsn/authnauth-node
           ports:
             - containerPort: 5000
+          env:
+            - name: DATABASE_URI
+              value: mongodb://mongo:27017/authnauth
+            - name: ACCESS_TOKEN_SECRET
+              value: "authnauth"
+            - name: REFRESH_TOKEN_SECRET
+              value: "authnauth"
 
 ---
 apiVersion: v1

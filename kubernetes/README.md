@@ -52,11 +52,11 @@ Once the container is deleted, the associated data is also deleted. To overcome 
 - emptyDir (persist data in the pod level)
 - hostPath (persist data in the node level)
 
-#### Persistent Volumes
+#### Persistent Volumes (PV)
 
 PVs won't depend upon a pod or a node. A PV is a piece of storage in the cluster.
 
-#### Persistent Volume Claim
+#### Persistent Volume Claim (PVC)
 
 In order to use the PV by the pods, PVC is created.
 
@@ -75,7 +75,7 @@ A database is a Stateful application because it stores a state. Any application 
 #### Problems with Deployment are,
 
 - In deployment when 2 are more replicas are created then all those replicas will have access to the same PV.
-- Due to this all pods will write to same storage which leads to data consitency.
+- Due to this all pods will write to same storage which leads to data inconsistency
 
 #### Statefulsets
 
