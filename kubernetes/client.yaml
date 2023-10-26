@@ -6,17 +6,20 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      component: web
+      component: client
   template:
     metadata:
       labels:
-        component: web
+        component: client
     spec:
       containers:
         - name: client
           image: roopeshsn/authnauth-react
           ports:
             - containerPort: 3000
+          env:
+            - name: "BASE_URL"
+              value: "http://server-service:5000"
 
 ---
 apiVersion: v1
@@ -24,9 +27,10 @@ kind: Service
 metadata:
   name: client-service
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
-    component: web
+    component: client
   ports:
     - port: 3000
       targetPort: 3000
+      nodePort: 31350

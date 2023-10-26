@@ -28,6 +28,8 @@ To get apiVersion,
 kubectl api-resources | grep deployment
 ```
 
+## Concepts
+
 ### Replicaset vs Deployment
 
 - To automate the Rollout and Rollback features of Kubernetes, a kind of Deployment is used.
@@ -140,6 +142,49 @@ rs.status()
 ```
 
 ---
+
+## Deploying client, server, and db
+
+Apply client's deployment and service:
+
+```
+kubectl apply -f .\kubernetes\client.yaml
+```
+
+Before applying mongo's deployment and service, apply sc and pvc:
+
+```
+kubectl apply -f .\kubernetes\mongo-storage-class.yaml
+kubectl apply -f .\kubernetes\mongo-persistent-volume-claim.yaml
+
+kubectl apply -f .\kubernetes\mongo.yaml
+```
+
+And apply server's deployment and service:
+
+```
+kubectl apply -f .\kubernetes\server.yaml
+```
+
+## Debugging
+
+To view logs,
+
+```
+kubectl logs server-deployment-6b6d9f65b5-qfc8s -c server
+```
+
+To exec into a pod,
+
+```
+kubectl exec --stdin --tty mongo-deployment-6c74786bf9-69szx -- /bin/bash
+```
+
+Port forwarding,
+
+```
+kubectl port-forward client-deployment-6cfb7c5b8f-c9785 3000:3000
+```
 
 ## Reference
 

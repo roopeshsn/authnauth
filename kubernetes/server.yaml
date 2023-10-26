@@ -19,7 +19,7 @@ spec:
             - containerPort: 5000
           env:
             - name: DATABASE_URI
-              value: mongodb://mongo:27017/authnauth
+              value: "mongodb://mongo-service:27017/authnauth"
             - name: ACCESS_TOKEN_SECRET
               value: "authnauth"
             - name: REFRESH_TOKEN_SECRET
